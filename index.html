@@ -1,148 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Delivery Details</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Details · Parcel Broken</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #edf1f5;
-    color: #1e293b;
-    padding: 20px;
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #edf1f5;
+      color: #1e293b;
+      padding: 20px;
+      min-height: 100vh;
+    }
 
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 18px;
-    align-items: start;
-  }
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
 
-  .column { display: flex; flex-direction: column; gap: 18px; }
+    .column { display: flex; flex-direction: column; gap: 18px; }
 
-  .card {
-    background: #fff;
-    border: 1px solid #e9eef4;
-    border-radius: 10px;
-    padding: 20px 24px 24px;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  }
+    .card {
+      background: #fff;
+      border: 1px solid #e9eef4;
+      border-radius: 10px;
+      padding: 20px 24px 24px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
 
-  .card-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 6px; }
-  .badge-blue { background: #dbeafe; color: #2563eb; }
-  .badge-gray { background: #e2e8f0; color: #475569; }
+    .badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 6px; }
+    .badge-blue { background: #dbeafe; color: #2563eb; }
+    .badge-gray { background: #e2e8f0; color: #475569; }
+    .badge-broken { background: #fee2e2; color: #b91c1c; }
 
-  .report-btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    color: #dc2626; font-size: 15px; font-weight: 500; text-decoration: none;
-  }
-  .report-btn:hover { text-decoration: underline; }
+    .report-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: #dc2626; font-size: 15px; font-weight: 500; text-decoration: none;
+    }
+    .report-btn:hover { text-decoration: underline; }
 
-  /* ---------- Recipient details ---------- */
-  .details-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 22px;
-    column-gap: 24px;
-  }
-  .field .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; }
-  .field .value { font-size: 14px; color: #1e293b; line-height: 1.5; }
-  .span-2 { grid-column: span 2; }
+    /* ---------- Recipient details ---------- */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 22px;
+      column-gap: 24px;
+    }
+    .field .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; }
+    .field .value { font-size: 14px; color: #1e293b; line-height: 1.5; }
+    .span-2 { grid-column: span 2; }
 
-  /* ---------- Cost of delivery ---------- */
-  .cost-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 7px 0; font-size: 14.5px;
-  }
-  .cost-row .c-label { color: #334155; }
-  .cost-row .c-value { color: #0f172a; }
-  .cost-row .c-value.negative { color: #dc2626; }
-  .cost-total {
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px dotted #cbd5e1;
-    margin-top: 10px; padding-top: 18px;
-    font-size: 18px; font-weight: 700; color: #0f172a;
-  }
+    /* ---------- Cost of delivery ---------- */
+    .cost-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 0; font-size: 14.5px;
+    }
+    .cost-row .c-label { color: #334155; }
+    .cost-row .c-value { color: #0f172a; }
+    .cost-row .c-value.negative { color: #dc2626; }
+    .cost-total {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px dotted #cbd5e1;
+      margin-top: 10px; padding-top: 18px;
+      font-size: 18px; font-weight: 700; color: #0f172a;
+    }
 
-  /* ---------- Progress bar ---------- */
-  .progress-area { margin: 30px 4px 8px; }
-  .truck-wrap { position: relative; height: 46px; }
-  .truck-wrap svg {
-    position: absolute; left: 72.5%; bottom: -3px;
-    transform: translateX(-50%);
-  }
-  .progress-track {
-    position: relative; height: 5px;
-    background: #e2e8f0; border-radius: 99px;
-  }
-  .progress-fill {
-    position: absolute; inset: 0 auto 0 0;
-    width: 72.5%; border-radius: 99px;
-    background: linear-gradient(90deg, #f87171, #dc2626);
-  }
-  .progress-labels {
-    display: flex; justify-content: space-between;
-    margin-top: 10px; font-size: 14px; color: #334155;
-  }
+    /* ---------- Progress bar with broken state ---------- */
+    .progress-area { margin: 30px 4px 8px; }
+    .truck-wrap { position: relative; height: 46px; }
+    .truck-wrap svg {
+      position: absolute; left: 50%; bottom: -3px;
+      transform: translateX(-50%);
+    }
+    .progress-track {
+      position: relative; height: 5px;
+      background: #e2e8f0; border-radius: 99px;
+    }
+    .progress-fill {
+      position: absolute; inset: 0 auto 0 0;
+      width: 50%; border-radius: 99px;
+      background: linear-gradient(90deg, #f87171, #b91c1c);
+    }
+    /* broken marker */
+    .break-marker {
+      position: absolute;
+      left: 50%;
+      top: -16px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+    }
+    .break-icon {
+      background: #b91c1c;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.4);
+      border: 2px solid white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .break-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #b91c1c;
+      background: #fee2e2;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-top: 4px;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+      border: 1px solid #fecaca;
+    }
 
-  /* ---------- Timeline list ---------- */
-  .timeline { margin-top: 34px; padding-left: 4px; }
-  .timeline-item { position: relative; display: flex; gap: 16px; padding-bottom: 24px; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-item:not(:last-child)::before {
-    content: '';
-    position: absolute; left: 11px; top: 26px; bottom: 4px;
-    width: 2px; background: #22c55e;
-  }
-  .t-icon {
-    width: 24px; height: 24px; border-radius: 50%;
-    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-    position: relative; z-index: 1;
-  }
-  .t-icon.success { background: #22c55e; }
-  .t-icon.danger  { background: #ef4444; }
-  .t-icon svg { width: 12px; height: 12px; }
-  .t-content h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 7px; }
-  .t-content p  { font-size: 14.5px; color: #1e293b; margin-bottom: 7px; }
-  .t-time { font-size: 12.5px; color: #94a3b8; }
+    .progress-labels {
+      display: flex; justify-content: space-between;
+      margin-top: 10px; font-size: 14px; color: #334155;
+    }
+    .progress-labels .Picked { font-weight: 600; color: #b91c1c; }
 
-  /* ---------- Delivery info ---------- */
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr; row-gap: 22px; column-gap: 24px; }
-  .full { grid-column: 1 / -1; }
+    /* ---------- Timeline list ---------- */
+    .timeline { margin-top: 34px; padding-left: 4px; }
+    .timeline-item { position: relative; display: flex; gap: 16px; padding-bottom: 24px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute; left: 11px; top: 26px; bottom: 4px;
+      width: 2px; background: #cbd5e1;
+    }
+    .t-icon {
+      width: 24px; height: 24px; border-radius: 50%;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .t-icon.success { background: #22c55e; }
+    .t-icon.danger  { background: #ef4444; }
+    .t-icon.broken  { background: #b91c1c; }
+    .t-icon svg { width: 12px; height: 12px; }
+    .t-content h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 7px; }
+    .t-content p  { font-size: 14.5px; color: #1e293b; margin-bottom: 7px; }
+    .t-time { font-size: 12.5px; color: #94a3b8; }
 
-  @media (max-width: 1024px) {
-    .container { grid-template-columns: 1fr; }
-    .details-grid { grid-template-columns: 1fr 1fr; }
-    .span-2 { grid-column: 1 / -1; }
-  }
-  @media (max-width: 560px) {
-    .details-grid, .info-grid { grid-template-columns: 1fr; }
-  }
-</style>
+    /* ---------- Broken note box ---------- */
+    .broken-note {
+      background: #fef2f2;
+      border-left: 5px solid #b91c1c;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 18px 0 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.08);
+    }
+    .broken-note .icon-big {
+      font-size: 28px;
+      line-height: 1;
+      color: #b91c1c;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .broken-note .note-text {
+      font-size: 15px;
+      color: #7f1d1d;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    .broken-note .note-text strong {
+      color: #991b1b;
+      font-weight: 700;
+    }
+    .broken-note .note-sub {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      color: #b91c1c;
+      background: #fff1f0;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px dashed #fca5a5;
+    }
+    .broken-note .note-sub svg {
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* ---------- Delivery info ---------- */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; row-gap: 22px; column-gap: 24px; }
+    .full { grid-column: 1 / -1; }
+
+    @media (max-width: 1024px) {
+      .container { grid-template-columns: 1fr; }
+      .details-grid { grid-template-columns: 1fr 1fr; }
+      .span-2 { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .details-grid, .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -165,8 +250,7 @@
       <div class="details-grid">
         <div class="field">
           <div class="label">Name</div>
-          <div class="value"> JABALE NOOR 
-</div>
+          <div class="value">JABALE NOOR</div>
         </div>
         <div class="field">
           <div class="label">Phone</div>
@@ -179,11 +263,11 @@
 
         <div class="field">
           <div class="label">City</div>
-          <div class="value">West shewrapara  </div>
+          <div class="value">West Shewrapara</div>
         </div>
         <div class="field">
           <div class="label">Zone</div>
-          <div class="value">Mirpur </div>
+          <div class="value">Mirpur</div>
         </div>
         <div class="field">
           <div class="label">Area</div>
@@ -192,27 +276,28 @@
 
         <div class="field span-2">
           <div class="label">Address</div>
-          <div class="value">beltola mosjid,west shewrapara, mirpur , dhaka 1216
- থানা: Mirpur , 
-জেলা: Mirpur </div>
+          <div class="value">Beltola Mosjid, West Shewrapara, Mirpur, Dhaka 1216<br>থানা: Mirpur, জেলা: Mirpur</div>
         </div>
         <div class="field">
           <div class="label">Amount to Collect</div>
-          <div class="value">  </div>
+          <div class="value">—</div>
         </div>
       </div>
     </div>
 
-    <!-- Timeline -->
+    <!-- Timeline + Broken Note -->
     <div class="card">
-      <h2 class="card-title">Timeline</h2>
-      <!-- Timeline -->
-    <div class="card">
-      <h2 class="card-title"> 
-         </h2>
+      <div class="card-header">
+        <h2 class="card-title">
+          <span>Timeline</span>
+          <span class="badge badge-broken">Broken</span>
+        </h2>
+      </div>
 
+      <!-- progress area with broken marker and icon -->
       <div class="progress-area">
         <div class="truck-wrap">
+          <!-- truck icon (steadfast style) -->
           <svg width="74" height="44" viewBox="0 0 74 44" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="5" width="40" height="25" rx="3" fill="#fdf6e3" stroke="#e8dcc0"/>
             <circle cx="12" cy="16" r="6.5" fill="#e63946"/>
@@ -226,17 +311,30 @@
             <circle cx="51" cy="33" r="2.5" fill="#9aa0a6"/>
           </svg>
         </div>
-        <div class="progress-track"><div class="progress-fill"></div></div>
+
+        <!-- progress track with break marker -->
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 50%;"></div>
+          <!-- broken marker positioned exactly at 50% -->
+          <div class="break-marker" style="left: 50%;">
+            <div class="break-icon">✕</div>
+            <div class="break-label">Parcel Broken</div>
+          </div>
+        </div>
+
         <div class="progress-labels">
           <span>Accepted</span>
-          <span class="Picked">Picked </span>
-          <span>Paid</span>
-          <span>Ready for Delivery</span>
-          <span>Delivered</span>
+          <span class="Picked">Picked</span>
+          <span></span>
+          <span>                  </span>
+          <span>Wait For Refund
+</span>
         </div>
       </div>
 
+      <!-- timeline items -->
       <div class="timeline">
+        <!-- Accepted -->
         <div class="timeline-item">
           <div class="t-icon success">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
@@ -245,34 +343,64 @@
           </div>
           <div class="t-content">
             <h4>Accepted</h4>
-            <p>- Pickup requested.</p>
+            <p>Pickup requested.</p>
             <span class="t-time">Sep 26, 2026 - 6:00 PM</span>
           </div>
         </div>
 
+        <!-- Picked + Broken event -->
         <div class="timeline-item">
-          <div class="t-icon danger">
+          <div class="t-icon broken">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round">
               <line x1="18" y1="6" x2="6" y2="18"/>
               <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </div>
           <div class="t-content">
-            <h4>Picked</h4>
-            <p>- Order Picked.  .</p>
-            <span class="t-time">Sep 27, 2026 - 09:46AM</span>
-            <div class="t-content">
-            <h4>Pay now </h4>
-            <p>-   support Number 09638871710 .</p>
-            <span class="t-time">Sep 29, 2026 - 04:00PM</span>
-            <p>- Friday & Saturday  timer pauses during off-days and SLA countdown begins Sunday at 00:0 .</p>
-            <span class="t-time">Oct 02, 2026 - 01:00AM</span>
-            
+            <h4>Picked — Parcel Broken</h4>
+            <p>Order picked but item was damaged / broken.</p>
+            <span class="t-time">Sep 05, 2026 - 05:45 PM</span>
+          </div>
+        </div>
+
+        <!-- Pay now / support -->
+        <div class="timeline-item">
+          <div class="t-icon danger" style="background: #b91c1c;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="9" stroke-width="2"/>
+              <path d="M12 8v5" stroke-width="2.5"/>
+              <circle cx="12" cy="16.5" r="0.8" fill="#fff" stroke="none"/>
+            </svg>
+          </div>
+          <div class="t-content">
+            <h4>Pay now · support</h4>
+            <p>Support Number: <strong>09638871710</strong></p>
+            <span class="t-time">Sep 29, 2026 - 04:00 PM</span>
+            <p style="margin-top: 8px; font-size: 13.5px; color: #475569;">
+              Friday &amp; Saturday timer pauses during off-days and SLA countdown begins Sunday at 00:00.
+            </p>
+            <span class="t-time">Oct 02, 2026 - 01:00 AM</span>
           </div>
         </div>
       </div>
-    </div>
 
+      <!-- ⭐ BROKEN NOTE: refund instructions with icon and note -->
+      <div class="broken-note">
+        <div class="icon-big">📦</div>
+        <div class="note-text">
+          <strong>Parcel broken — refund request</strong><br>
+          Your parcel was damaged during transit. To get your money back, please submit your number below. 
+          We will process the refund within 3–5 business days.
+          <span class="note-sub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            Submit your number → <strong>09638871710</strong> (or use the Nagad button on the right)
+          </span>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ================= RIGHT COLUMN ================= -->
@@ -281,19 +409,24 @@
     <!-- Cost of Delivery -->
     <div class="card">
       <div class="card-header">
-        <h2 class="card-title">Cost of Delivery <span class="badge badge-blue"> paid</span></h2>
+        <h2 class="card-title">Cost of Delivery <span class="badge badge-blue">paid</span></h2>
       </div>
 
       <div class="cost-row"><span class="c-label">Delivery Fee</span><span class="c-value">৳ 250 Paid</span></div>
       <div class="cost-row"><span class="c-label">COD Fee</span><span class="c-value">৳ 18</span></div>
       <div class="cost-row"><span class="c-label">Discount</span><span class="c-value negative">- ৳ 0</span></div>
       <div class="cost-row"><span class="c-label">Promo Discount</span><span class="c-value negative">- ৳ 0</span></div>
-      <div class="cost-row"><span class="c-label">Instand Pay </span><span class="c-value">৳ 1400 </span></div>
+      <div class="cost-row"><span class="c-label">Instant Pay</span><span class="c-value">৳ 1400</span></div>
       <div class="cost-row"><span class="c-label">Compensation Cost</span><span class="c-value">৳ 0</span></div>
 
-      <div class="cost-total"><span> Friday & Saturday timer pauses during off-days and SLA countdown begins Sunday at 00:0 </span><span>৳ Paid </span></div>
+      <div class="cost-total">
+        <span style="font-size: 13px; font-weight: 500; color: #475569; max-width: 60%;">
+          Friday &amp; Saturday timer pauses — SLA starts Sunday 00:00
+        </span>
+        <span>৳ Paid</span>
+      </div>
 
-      <!-- ===== Paid By Nagad Button (Paid - Green with Tick) ===== -->
+      <!-- Paid By Nagad Button (refund / submit number) -->
       <div style="margin-top: 22px;">
         <a href="https://superchat.bd/pathaopay" 
            target="_blank"
@@ -322,13 +455,16 @@
             <path d="M7 9h6.5a2.5 2.5 0 1 1 0 5H7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M7 14h7a2.5 2.5 0 1 1 0 5H7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Paid By Nagad           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          Submit number for refund
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="11" fill="#ffffff"/>
             <polyline points="7 12.5 10.2 15.5 17 8.5" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
         </a>
+        <p style="font-size: 12.5px; color: #64748b; text-align: center; margin-top: 12px; background: #f8fafc; padding: 8px; border-radius: 6px;">
+          ⚠️ Parcel broken — submit your number to get refund. Money will be returned within 3–5 days.
+        </p>
       </div>
-      <!-- ===== End Payment Button ===== -->
 
     </div>
 
@@ -341,35 +477,35 @@
       <div class="info-grid">
         <div class="field">
           <div class="label">Product Type</div>
-          <div class="value">Phone </div>
+          <div class="value">Phone</div>
         </div>
         <div class="field">
           <div class="label">Delivery Type</div>
-          <div class="value">Normal(48 hours)</div>
+          <div class="value">Normal (48 hours)</div>
         </div>
 
         <div class="field">
           <div class="label">Weight</div>
-          <div class="value">400 G </div>
+          <div class="value">400 G</div>
         </div>
         <div class="field">
           <div class="label">Amount to Collect</div>
-          <div class="value">৳ 1400 </div>
+          <div class="value">৳ 1400</div>
         </div>
 
         <div class="field full">
           <div class="label">Product Description</div>
-          <div class="value">-</div>
+          <div class="value">—</div>
         </div>
 
         <div class="field full">
           <div class="label">Special Instruction</div>
-          <div class="value">ফোন  আছে সাবধানে নিবেন </div>
+          <div class="value">ফোন আছে সাবধানে নিবেন</div>
         </div>
 
         <div class="field full">
           <div class="label">Modification Notes</div>
-          <div class="value">-</div>
+          <div class="value">—</div>
         </div>
       </div>
     </div>
